@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh """
                     ls -la
-                    zip -q -r ${configMap.component}.zip ${configMap.component} /static /templates"
+                    zip -q -r ${configMap.component}.zip ./${configMap.component} ./static ./templates"
                     ls -ltr
                 """
             }
