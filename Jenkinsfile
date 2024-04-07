@@ -71,10 +71,10 @@ pipeline {
             steps {
                 sh """
                     ls -ltr
-                    rm -v * !("${configMap.component}"|"static"|"templates")
+                    find . -type f ! -name "${configMap.component}" ! -name "static" ! -name "templates" -delete
                     ls -ltr
-                    zip -q -r ${configMap.component}.zip ./*"
-                    ls -ltr
+                    
+                   
                 """
             }
         }
