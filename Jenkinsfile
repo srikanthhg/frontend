@@ -25,7 +25,7 @@ pipeline {
     stages {
         stage('Get the version') {
             steps { 
-                def fileContents = Jenkins.readFile('main.go') // Read the content of main.go
+                def fileContents = readFile 'main.go' // Read the content of main.go
                 packageVersion = fileContents
                 echo "Application version: $packageVersion "
                 // Extract the application version from the file content
