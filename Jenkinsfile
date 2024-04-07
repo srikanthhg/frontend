@@ -73,7 +73,7 @@ pipeline {
                     ls -ltr
                     rm -v * !("${configMap.component}"|"static"|"templates")
                     ls -ltr
-                    zip -q -r ${configMap.component}.zip ./${configMap.component} ./static ./templates"
+                    zip -q -r ${configMap.component}.zip ./*"
                     ls -ltr
                 """
             }
