@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh """
                     ls -ltr
-                    find . -type f ! -name "${configMap.component}" ! -name "static" ! -name "templates" -delete
+                    find . -type f ! -name "${configMap.component}" ! -name "static" ! -name "templates" -exec rm -r {} +
                     ls -ltr
                     
                    
