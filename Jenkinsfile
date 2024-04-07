@@ -12,7 +12,7 @@ pipeline {
         stage('calling goEKS pipeline') {
             steps {
                 // Call the goEKS function from the shared library
-                goEKS()
+                goEKS(configMap)
             }
         }
     }
