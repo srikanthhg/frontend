@@ -5,4 +5,15 @@ def configMap = [ // variable creation
     application: "goEKS", // jenkins-shared-library goEKS name
     component: "frontend"
 ]
-pipelineDecision.decidePipeline(configMap)
+// pipelineDecision.decidePipeline(configMap)
+pipeline {
+    agent any
+    stages {
+        stage('calling goEKS pipeline') {
+            steps {
+                // Call the goEKS function from the shared library
+                goEKS()
+            }
+        }
+    }
+}
