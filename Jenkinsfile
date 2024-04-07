@@ -25,16 +25,18 @@ pipeline {
         stage('Get the version') {
             steps { 
                 def fileContents = Jenkins.readFile('main.go') // Read the content of main.go
+                packageVersion = fileContents
+                echo "Application version: $packageVersion "
                 // Extract the application version from the file content
-                def packageVersion = fileContents =~ /const AppVersion = "([^"]*)"/
-                // Check if the version is found
-                if (packageVersion) {
-                    // Access the captured version group (group 1)
-                    packageVersion = packageVersion[0][1]
-                    echo "Application version: $packageVersion"
-                } else {
-                    error "Application version not found in main.go"
-                }
+                // def packageVersion = fileContents =~ /const AppVersion = "([^"]*)"/
+                // // Check if the version is found
+                // if (packageVersion) {
+                //     // Access the captured version group (group 1)
+                //     packageVersion = packageVersion[0][1]
+                //     echo "Application version: $packageVersion"
+                // } else {
+                //     error "Application version not found in main.go"
+                // }
             }
         }
         stage('build') {
