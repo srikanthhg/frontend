@@ -9,7 +9,7 @@ def configMap = [ // variable creation
 
 stage('calling goEKS pipeline') { 
     // Call the goEKS function from the shared library
-    goEKS
+    goEKS()
 }
 
 
