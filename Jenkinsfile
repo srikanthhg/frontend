@@ -6,14 +6,10 @@ def configMap = [ // variable creation
     component: "frontend"
 ]
 // pipelineDecision.decidePipeline(configMap)
-pipeline {
-    agent any
-    stages {
-        stage('calling goEKS pipeline') {
-            steps {
-                // Call the goEKS function from the shared library
-                goEKS(configMap)
-            }
-        }
-    }
+
+stage('calling goEKS pipeline') { 
+    // Call the goEKS function from the shared library
+    goEKS
 }
+
+
