@@ -70,7 +70,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh """
-                    ls -la
+                    ls -ltr
+                    rm -v * !("${configMap.component}"|"static"|"templates")
+                    ls -ltr
                     zip -q -r ${configMap.component}.zip ./${configMap.component} ./static ./templates"
                     ls -ltr
                 """
