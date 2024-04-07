@@ -71,7 +71,8 @@ pipeline {
             steps {
                 sh """
                     ls -ltr
-                    find . -type f ! -name "${configMap.component}" ! -name "static" ! -name "templates" -exec rm -r {} +
+                    find . -mindepth 1 -maxdepth 1 -type d ! -name "${configMap.component}" ! -name "static" ! -name "templates" -exec rm -r {} +
+
                     ls -ltr
                     
                    
