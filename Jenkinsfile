@@ -1,16 +1,17 @@
 // @Library('hipstershop-shared-library') _
 
-def configMap = [ // variable creation
-    application: "goApp", // jenkins-shared-library nodejsVm name
-    component: "frontend"
-]
+// def configMap = [ // variable creation
+//     application: "goApp", // jenkins-shared-library nodejsVm name
+//     component: "frontend"
+// ]
 
 pipeline {
-    agent {
-        node{
-            label 'GO-AGENT'
-        }
-    }
+    agent any
+    // {
+    //     node{
+    //         label 'GO-AGENT'
+    //     }
+    // }
     environment { 
         packageVersion = ''
             
