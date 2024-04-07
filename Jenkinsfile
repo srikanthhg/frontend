@@ -1,9 +1,9 @@
 // @Library('hipstershop-shared-library') _
 
-// def configMap = [ // variable creation
-//     application: "goApp", // jenkins-shared-library nodejsVm name
-//     component: "frontend"
-// ]
+def configMap = [ // variable creation
+    application: "goApp", // jenkins-shared-library nodejsVm name
+    component: "frontend"
+]
 
 pipeline {
     agent any
@@ -55,5 +55,19 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+
+    }
+
+    post { 
+            always { 
+                echo 'I will always say Hello again!'
+                deleteDir()
+            }
+            failure { 
+                echo 'this runs when pipeline is failed, used generally to send some alerts'
+            }
+            success{
+                echo 'I will say Hello when pipeline is success'
+            }
     }
 }
