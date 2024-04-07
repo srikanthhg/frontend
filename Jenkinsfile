@@ -71,8 +71,7 @@ pipeline {
             steps {
                 sh """
                     ls -ltr
-                    find . -mindepth 1 -maxdepth 1 -type d ! -name "${configMap.component}" ! -name "static" ! -name "templates" -exec rm -r {} +
-
+                    zip -q -r ${configMap.component}.zip ./* -x ".git" -x "*.zip"
                     ls -ltr
                     
                    
