@@ -42,7 +42,7 @@ const (
 	cookiePrefix    = "shop_"
 	cookieSessionID = cookiePrefix + "session-id"
 	cookieCurrency  = cookiePrefix + "currency"
-	AppVersion = "1.0.0"
+	Version = "1.1.0"
 )
 
 var (
