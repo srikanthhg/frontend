@@ -71,7 +71,6 @@ jobs:
       # - name: Trivy Image Scan
       #   run: |
       #     trivy image --format table -o trivy-image-report.html srikanthhg/frontend:${{ github.sha }}
-            trivy image --format table  --output  trivy-image-report.html
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
