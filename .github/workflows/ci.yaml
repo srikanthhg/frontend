@@ -27,10 +27,13 @@ jobs:
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
-      
-      - name: Trivy FS scan
-        run: |
-          trivy fs --format table -o fs.html .
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          trivy-config: trivy.yaml
+      # - name: Trivy FS scan
+      #   run: |
+      #     trivy fs --format table -o fs.html .
 
       # - name: SonarQube Scan
       #   uses: sonarsource/sonarqube-scan-action@master
