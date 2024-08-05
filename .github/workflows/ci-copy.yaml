@@ -79,7 +79,7 @@ jobs:
         run: |
           trivy image --format table -o trivy-image-report.html srikanthhg/frontend:${{ github.sha }}
 
-  docker-login and push image:
+  docker-login-push-image:
     runs-on: self-hosted
     needs: trivy-image-scan
     steps:
