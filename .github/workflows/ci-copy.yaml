@@ -17,6 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+  setup-go:
+    runs-on: self-hosted
+    steps:
       - name: setup go
         uses: actions/setup-go@v5
         with:
@@ -26,10 +29,16 @@ jobs:
       - name: build the application
         run: go build -o frontned .
 
+  trivy-fs-scan:
+    runs-on: self-hosted
+    steps:
       - name: Trivy FS scan
         run: |
           trivy fs --format table -o fs.html .
 
+  sonar-scan:
+    runs-on: self-hosted
+    steps:
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
@@ -44,7 +53,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      
+
+  docker-image-build:
+    runs-on: self-hosted
+    steps:    
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -55,16 +67,25 @@ jobs:
         run: |
           docker build -t srikanthhg/frontend:${{ github.sha }} .
       
+  trivy-image-scan:
+    runs-on: self-hosted
+    steps:
       - name: Trivy Image Scan
         run: |
           trivy image --format table -o trivy-image-report.html srikanthhg/frontend:${{ github.sha }}
 
+  docker-login:
+    runs-on: self-hosted
+    steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+  push-imagetodockerhub:
+    runs-on: self-hosted
+    steps:
       - name: Push Docker Image
         run: |
             docker push srikanthhg/frontend:${{ github.sha }}
