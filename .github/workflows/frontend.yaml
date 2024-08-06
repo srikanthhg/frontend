@@ -1,5 +1,8 @@
 name: go lang
 
+env:
+  APP_NAME: frontend
+
 on:
   push:
     branches:
@@ -28,7 +31,7 @@ jobs:
       - run: go version
 
       - name: build the application
-        run: go build -o frontned .
+        run: go build -o $APP_NAME .
 
   trivy-fs-scan:
     runs-on: self-hosted
@@ -69,7 +72,7 @@ jobs:
       
       - name: Build and push
         run: |
-          docker build -t srikanthhg/frontend:${{ github.sha }} .
+          docker build -t srikanthhg/$APP_NAME:${{ github.sha }} .
       
   trivy-image-scan:
     runs-on: self-hosted
@@ -77,7 +80,7 @@ jobs:
     steps:
       - name: Trivy Image Scan
         run: |
-          trivy image --format table -o trivy-image-report.html srikanthhg/frontend:${{ github.sha }}
+          trivy image --format table -o trivy-image-report.html srikanthhg/$APP_NAME:${{ github.sha }}
 
   docker-login-push-image:
     runs-on: self-hosted
@@ -91,5 +94,5 @@ jobs:
 
       - name: Push Docker Image
         run: |
-            docker push srikanthhg/frontend:${{ github.sha }}
+            docker push srikanthhg/$APP_NAME:${{ github.sha }}
 
